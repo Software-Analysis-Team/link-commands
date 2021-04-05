@@ -1,0 +1,5 @@
+find . -type f -not \( -name '*o' -or -name '*json' -or -name 'ade' -or -name ippicv \) -delete
+
+find . \( ! -regex '.*/\..*' \) -type f | wc -l
+
+find . -type d \( -path ./build -o -path ./cmake-build-debug \) -prune -false -o \( ! -regex '.*/\..*' \) -type f | xargs wc -l
