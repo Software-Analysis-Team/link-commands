@@ -3,8 +3,8 @@
 This document describes a format for specifying how to replay single link commands independently of the build system.
 
 ## Background
-
-Like compilation commands, link commands are needed for code analysis, for example, look into simple C/C++ code:  
+Currently, there is compilation database, which specified by [Clang](https://clang.llvm.org/docs/JSONCompilationDatabase.html). Compilation commands are actively used for syntax analysis of code, 
+but there are cases, when the compilation commands cannot provide all the necessary information, for example, look into simple C/C++ code:  
 `a.cpp:`
 ```
 int f(int a) {
@@ -24,12 +24,12 @@ int g(int a) {
 }
 ```
 A tool may need to know which function is actually called, but this information is only available at linking step as soon as there may be several functions with same name in different units.  
-More example:
+Using of links database is providing advanced software analysis.
+More examples:
 
 1) Unit testing tools which use code analysis need to understand which function is called in order to get correct test result.
 2) IDEs need it to understand which file to go when you click "Go to definition" on a function call.
 
-In addition, it is possible to extract link commands from build systems without executing the program.
 ## Supported Systems
 
 Currently CMake (since X.Y.Z) supports generation of link databases for Unix Makefile builds (Ninja builds in the works) with the option CMAKE_EXPORT_LINK_COMMANDS.
@@ -37,10 +37,15 @@ Currently CMake (since X.Y.Z) supports generation of link databases for Unix Mak
 There is no an alternative to intercept link calls with a other tool.
 
 ## Format
-A link database is a JSON file, which consist of an array of “command objects”, where each command object specifies one way a translation unit is linked in the project. The file format is exactly the same as for the compilation commands with minor changes:
+### Version 1.0.0
+Currently, there is no standard for the format of linking commands, so we providing version of format.
 
-1) Instead of a single source С/С++ file, an array which described all the object files, dynamic and static libraries needed for linking
-2) Swapped the order of the fields directory and command  
+A link database is a JSON file, which consist of an array of “command objects”, where each command object specifies one way a target or library.
+The contracts for each field in the command object are:
+
+* **command**: The link command executed. The field contains all the flags and files needed to create a target or library. As result of executing all commands, it's a full-build project.
+* **directory** The working directory of the link's command. All paths specified in the command or file fields must be either absolute or relative to this directory.
+* **files** An array which described all the object files, dynamic and static libraries needed for linking
 Example:
 
 ```
@@ -61,7 +66,3 @@ Example:
 	...
 ]
 ```
-
-## Build System Integration
-The convention is to name the file link_commands.json and put it at the top of the build directory.
-
