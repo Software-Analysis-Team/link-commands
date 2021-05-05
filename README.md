@@ -3,7 +3,7 @@
 This document describes a format for specifying how to replay single link commands independently of the build system.
 
 ## Background
-Currently, there is compilation database, which specified by [Clang](https://clang.llvm.org/docs/JSONCompilationDatabase.html). Compilation commands are actively used for syntax analysis of code, 
+Currently, there is compilation database format, which specified by [Clang](https://clang.llvm.org/docs/JSONCompilationDatabase.html). Compilation commands are actively used for syntax analysis of code, 
 but there are cases, when the compilation commands cannot provide all the necessary information, for example, look into simple C/C++ code:  
 `a.cpp:`
 ```
@@ -24,7 +24,7 @@ int g(int a) {
 }
 ```
 A tool may need to know which function is actually called, but this information is only available at linking step as soon as there may be several functions with same name in different units.  
-Using of links database is providing advanced software analysis.
+Using of link database is providing more information for advance software analysis.
 More examples:
 
 1) Unit testing tools which use code analysis need to understand which function is called in order to get correct test result.
@@ -37,19 +37,28 @@ Currently CMake (since X.Y.Z) supports generation of link databases for Unix Mak
 There is no an alternative to intercept link calls with a other tool.
 
 ## Format
-### Version 1.0.0
-Currently, there is no standard for the format of linking commands, so we providing version of format.
+### Version 0.0.1
 
-A link database is a JSON file, which consist of an array of “command objects”, where each command object specifies one way a target or library.
+A link database is a JSON file, which consist of an array of “command objects”, where each command object specifies one way a target or library and first element is a version of format instead of link's command. 
 The contracts for each field in the command object are:
 
 * **command**: The link command executed. The field contains all the flags and files needed to create a target or library. As result of executing all commands, it's a full-build project.
 * **directory** The working directory of the link's command. All paths specified in the command or file fields must be either absolute or relative to this directory.
-* **files** An array which described all the object files, dynamic and static libraries needed for linking
+* **files** An array which described all the object files, dynamic and static libraries needed for linking.
+* **arguments** The link command executed as list of strings. Either arguments or command is required.
+* **output** The name of the output created by this linking step. This field is optional. It can be used to distinguish different processing modes of the same input.
+
+Using link commands from file can give 3 different types of output:  
+* executable file 
+* static library
+* dynamic library
+
 Example:
 
 ```
-[
+[   {
+      "version": 0.0.1
+    },
 	{
 	  "command": "/usr/bin/ar qc libcmstd.a CMakeFiles/cmstd.dir/cm/bits/fs_path.cxx.o CMakeFiles/cmstd.dir/cm/bits/string_view.cxx.o",
           "directory": "/home/myuser/cmake/build/Utilities/std",
@@ -66,3 +75,5 @@ Example:
 	...
 ]
 ```
+
+This example demonstrates command ***ar*** to create ***dynamic library libcmstd.a*** and ***cc*** command to create ***purify target***
