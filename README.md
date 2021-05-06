@@ -3,7 +3,7 @@
 This document describes a format for specifying how to replay single link commands independently of the build system.
 
 ## Background
-Currently, there is compilation database format, which specified by [Clang](https://clang.llvm.org/docs/JSONCompilationDatabase.html). Compilation commands are actively used for syntax analysis of code, 
+Currently, there is [compilation database format](https://clang.llvm.org/docs/JSONCompilationDatabase.html), which specified by Clang. Compilation commands are actively used for syntax analysis of code, 
 but there are cases, when the compilation commands cannot provide all the necessary information, for example, look into simple C/C++ code:  
 `a.cpp:`
 ```
@@ -30,16 +30,10 @@ More examples:
 1) Unit testing tools which use code analysis need to understand which function is called in order to get correct test result.
 2) IDEs need it to understand which file to go when you click "Go to definition" on a function call.
 
-## Supported Systems
-
-Currently CMake (since X.Y.Z) supports generation of link databases for Unix Makefile builds (Ninja builds in the works) with the option CMAKE_EXPORT_LINK_COMMANDS.
-
-There is no an alternative to intercept link calls with a other tool.
-
 ## Format
 ### Version 0.0.1
 
-A link database is a JSON file, which consist of an array of “command objects”, where each command object specifies one way a target or library and first element is a version of format instead of link's command. 
+A link database is a JSON file, which consist of an array of “command objects”, where each command object specifies one way a target and first element is a version of format instead of link's command. 
 The contracts for each field in the command object are:
 
 * **command**: The link command executed. The field contains all the flags and files needed to create a target or library. As result of executing all commands, it's a full-build project.
@@ -56,24 +50,75 @@ Using link commands from file can give 3 different types of output:
 Example:
 
 ```
-[   {
+[   
+    {
       "version": 0.0.1
     },
 	{
-	  "command": "/usr/bin/ar qc libcmstd.a CMakeFiles/cmstd.dir/cm/bits/fs_path.cxx.o CMakeFiles/cmstd.dir/cm/bits/string_view.cxx.o",
-          "directory": "/home/myuser/cmake/build/Utilities/std",
-	  "files": [	   "/home/myuser/cmake/build/Utilities/std/CMakeFiles/cmstd.dir/cm/bits/fs_path.cxx.o",	    "/home/myuser/cmake/build/Utilities/std/CMakeFiles/cmstd.dir/cm/bits/string_view.cxx.o"
+	  "command" : "/usr/bin/ar qc libcmstd.a CMakeFiles/cmstd.dir/cm/bits/fs_path.cxx.o CMakeFiles/cmstd.dir/cm/bits/string_view.cxx.o",
+      "directory" : "/home/myuser/exampleProject/build/Utilities/std",
+	  "files" : 
+	  [
+	      "/home/myuser/exampleProject/build/Utilities/std/CMakeFiles/cmstd.dir/cm/bits/fs_path.cxx.o", 
+	      "/home/myuser/exampleProject/build/Utilities/std/CMakeFiles/cmstd.dir/cm/bits/string_view.cxx.o"
 	  ]
 	},
 	{
-	  "command": "/usr/bin/cc  -Wcast-align -Werror-implicit-function-declaration -Wchar-subscripts -Wall -W -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -fno-common -Wundef CMakeFiles/pseudonl_purify.dir/ret0.c.o -o purify",
-          "directory": "/home/myuser/cmake/build/Tests/CMakeLib/PseudoMemcheck/NoLog",
-	  "files": [
-"/home/myuser/cmake/build/Tests/CMakeLib/PseudoMemcheck/NoLog/CMakeFiles/pseudonl_purify.dir/ret0.c.o"
+	  "command" : "/usr/bin/cc  -Wcast-align -Werror-implicit-function-declaration -Wchar-subscripts -Wall -W -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -fno-common -Wundef CMakeFiles/pseudonl_purify.dir/ret0.c.o -o purify",
+      "directory" : "/home/myuser/exampleProject/build/Tests/CMakeLib/PseudoMemcheck/NoLog",
+	  "files" : 
+	  [
+          "/home/myuser/exampleProject/build/Tests/CMakeLib/PseudoMemcheck/NoLog/CMakeFiles/pseudonl_purify.dir/ret0.c.o"
 	  ]
 	},
 	...
 ]
 ```
 
-This example demonstrates command ***ar*** to create ***dynamic library libcmstd.a*** and ***cc*** command to create ***purify target***
+This example demonstrates command ***ar*** to create ***dynamic library libcmstd.a*** and ***cc*** command to create ***purify target***  
+
+In addition to the commands responsible for linking, link database can contain commands specific to the build system:
+Example for CMake build system:
+1) CMake command for deleting library
+```
+[   
+    ...
+	{
+	  "command" : "/usr/local/bin/cmake -E rm -f CMakeFiles/library.dir/lib.a",
+      "directory" : "/home/myuser/exampleProject/build/Utilities/std",
+	  "files" : 
+	  [
+	      "/home/myuser/exampleProject/build/Utilities/std/CMakeFiles/cmstd.dir/cm/bits/file1.cxx.o", 
+	      "/home/myuser/exampleProject/build/Utilities/std/CMakeFiles/cmstd.dir/cm/bits/file2.cxx.o"
+	  ]
+	},
+	...
+]
+```
+2) [CMake lwyu static checker](https://blog.kitware.com/static-checks-with-cmake-cdash-iwyu-clang-tidy-lwyu-cpplint-and-cppcheck/)
+```
+[
+    ...
+    {
+        "command": "/usr/local/bin/cmake -E __run_co_compile --lwyu=some_target",
+        "directory": "/home/myuser/exampleProject/build",
+        "files":
+        [
+            "/home/myuser/exampleProject/build/Utilities/std/CMakeFiles/cmstd.dir/cm/bits/file3.c.o"
+        ]
+    },
+    ...
+]
+```
+3) [ranlib command](https://man7.org/linux/man-pages/man1/ranlib.1.html)
+```
+[   
+    ...
+	{
+	  "command" : "/usr/bin/ranlib library.a",
+      "directory" : "/home/myuser/exampleProject/build",
+	  "files" : []
+	},
+	...
+]
+```
