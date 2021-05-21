@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc libsay-c.a CMakeFiles/say-c.dir/a.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib libsay-c.a

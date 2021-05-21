@@ -1,0 +1,87 @@
+[
+	{
+		"command" : "/Library/Developer/CommandLineTools/usr/bin/c++  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names -Wl CMakeFiles/maina.dir/maina.cpp.o  -o maina libsay-c.a  libsay-a.a",
+		"directory" : "/Users/gmirzazyanov/Documents/research/example/build",
+		"files" : 
+		[
+			"CMakeFiles/maina.dir/maina.cpp.o"
+		]
+	},
+	{
+		"command" : "/Library/Developer/CommandLineTools/usr/bin/c++  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names -Wl CMakeFiles/mainb.dir/mainb.cpp.o CMakeFiles/mainb.dir/b.cpp.o  -o mainb",
+		"directory" : "/Users/gmirzazyanov/Documents/research/example/build",
+		"files" : 
+		[
+			"CMakeFiles/mainb.dir/mainb.cpp.o",
+			"CMakeFiles/mainb.dir/b.cpp.o"
+		]
+	},
+	{
+		"command" : "/Users/gmirzazyanov/Documents/CMake/cmake-build-debug/bin/cmake -E rm -f $TARGET_FILE",
+		"directory" : "/Users/gmirzazyanov/Documents/research/example/build",
+		"files" : 
+		[
+			"CMakeFiles/say-c.dir/a.cpp.o"
+		]
+	},
+	{
+		"command" : "/Library/Developer/CommandLineTools/usr/bin/ar qc libsay-c.a CMakeFiles/say-c.dir/a.cpp.o",
+		"directory" : "/Users/gmirzazyanov/Documents/research/example/build",
+		"files" : 
+		[
+			"CMakeFiles/say-c.dir/a.cpp.o"
+		]
+	},
+	{
+		"command" : "/Library/Developer/CommandLineTools/usr/bin/ranlib libsay-c.a",
+		"directory" : "/Users/gmirzazyanov/Documents/research/example/build",
+		"files" : 
+		[
+			"CMakeFiles/say-c.dir/a.cpp.o"
+		]
+	},
+	{
+		"command" : "/Users/gmirzazyanov/Documents/CMake/cmake-build-debug/bin/cmake -E touch $TARGET_FILE",
+		"directory" : "/Users/gmirzazyanov/Documents/research/example/build",
+		"files" : 
+		[
+			"CMakeFiles/say-c.dir/a.cpp.o"
+		]
+	},
+	{
+		"command" : "/Users/gmirzazyanov/Documents/CMake/cmake-build-debug/bin/cmake -E rm -f $TARGET_FILE",
+		"directory" : "/Users/gmirzazyanov/Documents/research/example/build",
+		"files" : 
+		[
+			"CMakeFiles/say-a.dir/c.cpp.o",
+			"CMakeFiles/say-a.dir/a1.cpp.o"
+		]
+	},
+	{
+		"command" : "/Library/Developer/CommandLineTools/usr/bin/ar qc libsay-a.a CMakeFiles/say-a.dir/c.cpp.o CMakeFiles/say-a.dir/a1.cpp.o",
+		"directory" : "/Users/gmirzazyanov/Documents/research/example/build",
+		"files" : 
+		[
+			"CMakeFiles/say-a.dir/c.cpp.o",
+			"CMakeFiles/say-a.dir/a1.cpp.o"
+		]
+	},
+	{
+		"command" : "/Library/Developer/CommandLineTools/usr/bin/ranlib libsay-a.a",
+		"directory" : "/Users/gmirzazyanov/Documents/research/example/build",
+		"files" : 
+		[
+			"CMakeFiles/say-a.dir/c.cpp.o",
+			"CMakeFiles/say-a.dir/a1.cpp.o"
+		]
+	},
+	{
+		"command" : "/Users/gmirzazyanov/Documents/CMake/cmake-build-debug/bin/cmake -E touch $TARGET_FILE",
+		"directory" : "/Users/gmirzazyanov/Documents/research/example/build",
+		"files" : 
+		[
+			"CMakeFiles/say-a.dir/c.cpp.o",
+			"CMakeFiles/say-a.dir/a1.cpp.o"
+		]
+	}
+]

@@ -1,0 +1,6 @@
+/Users/gmirzazyanov/Documents/research/example/build/CMakeFiles/rebuild_cache.dir
+/Users/gmirzazyanov/Documents/research/example/build/CMakeFiles/maina.dir
+/Users/gmirzazyanov/Documents/research/example/build/CMakeFiles/edit_cache.dir
+/Users/gmirzazyanov/Documents/research/example/build/CMakeFiles/mainb.dir
+/Users/gmirzazyanov/Documents/research/example/build/CMakeFiles/say-c.dir
+/Users/gmirzazyanov/Documents/research/example/build/CMakeFiles/say-a.dir

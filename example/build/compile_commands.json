@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/Users/gmirzazyanov/Documents/research/example/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -mmacosx-version-min=11.2 -Wall -Werror -Wextra -pedantic -std=gnu++14 -o CMakeFiles/maina.dir/maina.cpp.o -c /Users/gmirzazyanov/Documents/research/example/maina.cpp",
+  "file": "/Users/gmirzazyanov/Documents/research/example/maina.cpp"
+},
+{
+  "directory": "/Users/gmirzazyanov/Documents/research/example/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -mmacosx-version-min=11.2 -Wall -Werror -Wextra -pedantic -std=gnu++14 -o CMakeFiles/mainb.dir/mainb.cpp.o -c /Users/gmirzazyanov/Documents/research/example/mainb.cpp",
+  "file": "/Users/gmirzazyanov/Documents/research/example/mainb.cpp"
+},
+{
+  "directory": "/Users/gmirzazyanov/Documents/research/example/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -mmacosx-version-min=11.2 -Wall -Werror -Wextra -pedantic -std=gnu++14 -o CMakeFiles/mainb.dir/b.cpp.o -c /Users/gmirzazyanov/Documents/research/example/b.cpp",
+  "file": "/Users/gmirzazyanov/Documents/research/example/b.cpp"
+},
+{
+  "directory": "/Users/gmirzazyanov/Documents/research/example/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -mmacosx-version-min=11.2 -Wall -Werror -Wextra -pedantic -std=gnu++14 -o CMakeFiles/say-c.dir/a.cpp.o -c /Users/gmirzazyanov/Documents/research/example/a.cpp",
+  "file": "/Users/gmirzazyanov/Documents/research/example/a.cpp"
+},
+{
+  "directory": "/Users/gmirzazyanov/Documents/research/example/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -mmacosx-version-min=11.2 -Wall -Werror -Wextra -pedantic -std=gnu++14 -o CMakeFiles/say-a.dir/c.cpp.o -c /Users/gmirzazyanov/Documents/research/example/c.cpp",
+  "file": "/Users/gmirzazyanov/Documents/research/example/c.cpp"
+},
+{
+  "directory": "/Users/gmirzazyanov/Documents/research/example/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -mmacosx-version-min=11.2 -Wall -Werror -Wextra -pedantic -std=gnu++14 -o CMakeFiles/say-a.dir/a1.cpp.o -c /Users/gmirzazyanov/Documents/research/example/a1.cpp",
+  "file": "/Users/gmirzazyanov/Documents/research/example/a1.cpp"
+}
+]
