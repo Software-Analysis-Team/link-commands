@@ -77,8 +77,8 @@ Example:
 
 This example demonstrates command ***ar*** to create ***dynamic library libcmstd.a*** and ***cc*** command to create ***purify target***  
 
-In addition to the commands responsible for linking, link database can contain commands specific to the build system:
-Example for CMake build system:
+Note: we decided to filter cmake commands and ranlib commands.
+Example filtered commands:
 1) CMake command for deleting library
 ```
 [   
